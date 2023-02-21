@@ -18,6 +18,9 @@
     "url": "https://github.com/bitovi/eslint-plugin-nx-glue/issues"
   },
   "homepage": "https://github.com/bitovi/eslint-plugin-nx-glue#readme",
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "copy": "cp package.json dist/ && cp README.md dist/",
     "build": "rimraf dist && tsc && npm run copy"
