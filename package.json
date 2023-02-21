@@ -1,0 +1,34 @@
+{
+  "name": "@bitovi/eslint-plugin-nx-glue",
+  "version": "1.0.0",
+  "description": "Allows local ESLint Rules written in TypeScript to be available within Nx workspace",
+  "main": "index.js",
+  "types": "index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bitovi/eslint-plugin-nx-glue.git"
+  },
+  "author": {
+    "name": "Bitovi",
+    "email": "contact@bitovi.com",
+    "web": "https://www.bitovi.com/"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bitovi/eslint-plugin-nx-glue/issues"
+  },
+  "homepage": "https://github.com/bitovi/eslint-plugin-nx-glue#readme",
+  "scripts": {
+    "copy": "cp package.json dist/ && cp README.md dist/",
+    "build": "rimraf dist && tsc && npm run copy"
+  },
+  "peerDependencies": {
+    "nx": "~15"
+  },
+  "devDependencies": {
+    "@typescript-eslint/utils": "^5.36.1",
+    "@types/node": "^18.14.0",
+    "rimraf": "^4.1.2",
+    "typescript": "~4.9.5"
+  }
+}
