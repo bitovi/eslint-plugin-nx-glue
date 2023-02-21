@@ -1,6 +1,6 @@
 {
   "name": "@bitovi/eslint-plugin-nx-glue",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "Allows local ESLint Rules written in TypeScript to be available within Nx workspace",
   "main": "index.js",
   "types": "index.d.ts",

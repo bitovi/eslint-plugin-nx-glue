@@ -1,6 +1,6 @@
 # ESLint Plugin Nx Glue
 
-Allows local ESLint Rules written in TypeScript or JavaScript to be available within Nx workspace. This means that developers can write their own ESLint Rules within a project and also use them for that project without having to publish those ESLint Rules or use Symlinks.
+Allows local ESLint Rules written in TypeScript to be available within a Nx workspace or any project. This means that developers can create their own custom ESLint Plugins within a project and consume them within that project without having to publish or use Symlinks.
 
 ## Installation
 
@@ -8,7 +8,7 @@ Allows local ESLint Rules written in TypeScript or JavaScript to be available wi
 npm install -D @bitovi/eslint-plugin-nx-glue
 ```
 
-This library assumes you are using an [Nx workspace](https://nx.dev/). If you are not, you will have to also install `nx` as a dev-dependency:
+This library assumes your project is an [Nx workspace](https://nx.dev/). If you are not, you will have to also install `nx` as a dev-dependency:
 
 ```bash
 npm install -D nx@15
@@ -16,7 +16,7 @@ npm install -D nx@15
 
 ## How to Use
 
-Create an `eslint-plugin-nx-glue.config.js` file at the root of your project. This file will export all of your ESLint Plugins by name, a path to its exported rules, and which typescript configuration to use:
+Create an `eslint-plugin-nx-glue.config.js` file at the root of your project. This file will export your ESLint Plugins by name, a path to its exported rules, and which TypeScript configuration to use:
 
 ```js
 // eslint-plugin-nx-glue.config.js
@@ -64,7 +64,7 @@ Now you can include these rules into your eslint configuration by adding `@bitov
 }
 ```
 
-## eslint-plugin-glue Configuration Schema
+## Configuration Schema
 
 Listed below is a detailed explaination of how the `eslint-plugin-glue` configuration schema affects how you can consume your custom rules:
 
@@ -84,11 +84,11 @@ module.exports = {
 };
 ```
 
-`eslint-plugin-glue` configuration schema:
+Configuration schema:
 
 1. `plugin-name`: Used to distinguish each plugin. This allows for plugins to have the same named rules within the same project.
 2. `dir`: Path to `index.ts` from root of project. This is the location of the exported ESLint Plugin.
-3. `tsconfig`: Relative path from `dir` to typescript configuration. Defaults to `tsconfig.json` which would imply that the typescript configuration file lives inside the same directory as `index.ts`.
+3. `tsconfig`: Relative path from `dir` to TypeScript configuration. Defaults to `tsconfig.json` which would imply that the TypeScript configuration file lives inside the same directory as `index.ts`.
 
 This allows you to consume your custom rules exported by your local ESLint Plugins:
 
@@ -103,8 +103,7 @@ This allows you to consume your custom rules exported by your local ESLint Plugi
       "rules": {
         "@bitovi/nx-glue/<plugin-name>/<custom-rule-name>": "...",
         "@bitovi/nx-glue/<plugin-name>/<custom-rule-name-2>": "...",
-        "@bitovi/nx-glue/<plugin-name-2>/<another-custom-rule-name>": "...",
-        // ...
+        "@bitovi/nx-glue/<plugin-name-2>/<another-custom-rule-name>": "..."
       }
     }
   ]
@@ -115,6 +114,6 @@ This allows you to consume your custom rules exported by your local ESLint Plugi
 
 If you are using [VSCode's ESLint extention](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint), you will have to restart your ESLint server whenever you make changes to your ESLint Plugin(s). You can quickly restart your ESLint server by using the [Command Palette](https://code.visualstudio.com/docs/getstarted/tips-and-tricks#_command-palette) and selecting `ESLint: Restart ESLint Server`.
 
-## Overriding eslint-plugin-glue Configuration Path
+## Overriding Configuration Path
 
 You can set path to your `eslint-plugin-glue` configuration by setting `ESLINT_PLUGIN_GLUE_CONFIG_PATH` environment variable. By default, eslint-plugin-glue configuration is expected to be at the root of your project and to be named `eslint-plugin-glue.config.js`.
