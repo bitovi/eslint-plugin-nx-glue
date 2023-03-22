@@ -23,8 +23,8 @@ Create an `eslint-plugin-nx-glue.config.js` file at the root of your project. Th
 
 module.exports = {
   'my-plugin': {
-    dir: 'tools/my-rules',// Required
-    tsconfig: 'tsconfig.json',// Optional: default is tsconfig.json
+    dir: 'tools/my-rules',
+    tsconfig: 'tools/my-rules/tsconfig.json',
   },
 };
 ```
@@ -73,12 +73,12 @@ Listed below is a detailed explaination of how the `eslint-plugin-glue` configur
 
 module.exports = {
     '<plugin-name>': {
-      dir: 'path to index.ts from root of project',// Required
-      tsconfig: 'relative path from dir',// Optional: default is tsconfig.json
+      dir: 'path/to/rules/from/root/of/project',
+      tsconfig: 'path/to/tsconfig/from/root/of/project/tsconfig.json',
     },
     '<plugin-name-2>': {
-      dir: 'path to index.ts from root of project',// Required
-      tsconfig: 'relative path from dir',// Optional: default is tsconfig.json
+      dir: 'path/to/rules/from/root/of/project',
+      tsconfig: 'path/to/tsconfig/from/root/of/project/tsconfig.json',
     },
     // ...
 };
@@ -88,7 +88,7 @@ Configuration schema:
 
 1. `plugin-name`: Used to distinguish each plugin. This allows for plugins to have the same named rules within the same project.
 2. `dir`: Path to `index.ts` from root of project. This is the location of the exported ESLint Plugin.
-3. `tsconfig`: Relative path from `dir` to TypeScript configuration. Defaults to `tsconfig.json` which would imply that the TypeScript configuration file lives inside the same directory as `index.ts`.
+3. `tsconfig`: Path to TypeScript configuration from root of project.
 
 This allows you to consume your custom rules exported by your local ESLint Plugins:
 
