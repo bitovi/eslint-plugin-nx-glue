@@ -27,7 +27,7 @@ export const workspaceRules = ((): ESLintRules => {
 
   // Get all plugin names and rules folder paths
   Object.entries(config).forEach(([pluginName, pluginConfig]) => {
-    const { dir, tsconfig } = pluginConfig;
+    const { dir, tsconfig: tsconfigFullPath } = pluginConfig;
     
     // If rules folder doesn't exist, there is no point trying to register and load it
     if (!existsSync(dir)) {
@@ -35,7 +35,7 @@ export const workspaceRules = ((): ESLintRules => {
     }
 
     // // Register plugin for TS transpilation
-    const registrationCleanup = registerTsProject(dir, tsconfig);
+    const registrationCleanup = registerTsProject(...getTsConfigArgs(tsconfigFullPath));
 
     try {
       /**
@@ -64,4 +64,21 @@ export const workspaceRules = ((): ESLintRules => {
  */
 function getConfigPath() {
   return process.env.ESLINT_PLUGIN_GLUE_CONFIG_PATH || join(workspaceRoot, 'eslint-plugin-glue.config.js');
+}
+
+function getTsConfigArgs(tsconfigFullPath: string): [string, string] {
+  if (!tsconfigFullPath.endsWith('.json')) {
+    return [tsconfigFullPath, 'tsconfig.json'];
+  }
+
+  const parts = tsconfigFullPath.split('/');
+
+  if (parts.length === 1) {
+    return ['', parts[0]];
+  }
+
+  const tsconfig = parts.pop() ?? 'tsconfig.json';
+
+
+  return [parts.join('/'), tsconfig];
 }
